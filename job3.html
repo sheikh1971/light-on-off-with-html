@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+         body{
+            text-align: center;
+         }
+             
+
+          #Container{
+               background:  lightgray;
+               width: 100%;
+               height: 100vh;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+         
+          }
+
+         
+
+
+
+          #LightContainer{
+               background:   black;
+               width: 200px;
+               height: 300px;
+               display:block;
+               align-items: center;
+               justify-content: center;
+
+          }
+
+          #SwitchContainer{
+               background: rgb(14, 125, 46);
+               width: 200px;
+               height: 100px;
+          }
+
+          img{
+            height: 300px;
+            width: 200px;
+          }
+    </style>
+</head>
+<body>
+
+     <div id="Container">
+
+        <div id="SubContainer">
+            <div id="LightContainer">
+                <img src="light2.png" id="light">
+            </div>
+
+            <div id="SwitchContainer">
+                   <button onclick="turnOnLight()" id="switch"> Turn On </button>
+                    &nbsp;  &nbsp;
+                   Auto
+                   <input type="checkbox" onchange="autoStatus()" id="checkbox">
+            </div>            
+
+            
+        </div>
+          
+     </div>
+
+     <script>
+          
+      var myTimer;
+
+      function stopTimer(){
+          clearInterval(window.myTimer);
+      }
+
+      function startTimer(){
+          var toggle = true;
+          window.myTimer = setInterval (function(){
+               
+               if(toggle){
+                    turnOnLight();
+                    toggle = false;
+               }
+                    else{
+                         turnOffLight();
+                         toggle = true;
+                    }
+               
+               
+
+          } , 300);
+      }
+
+      /*function of on/off switches*/
+
+      function turnOnLight(){
+          let lightObj = document.getElementById("light");
+          lightObj.setAttribute("src" , "light1.png");
+          document.getElementById("switch").innerHTML = "Turn Off";
+          let switchObj = document.getElementById("switch");
+          switchObj.setAttribute("onclick" , "turnOffLight()")
+      }
+      function turnOffLight(){
+          let lightObj = document.getElementById("light");
+          lightObj.setAttribute("src" , "light2.png");
+          document.getElementById("switch").innerHTML = "Turn On";
+          let switchObj = document.getElementById("switch");
+          switchObj.setAttribute("onclick" , "turnOnLight()")
+      }
+
+
+      //auto
+
+      function autoStatus(){
+
+          let checkboxStat = document.getElementById("checkbox").checked;
+
+          if(checkboxStat){
+               startTimer();
+
+          }
+          else{
+               stopTimer();
+          }
+      }
+
+
+
+
+
+
+     </script>
+    
+</body>
+</html>
